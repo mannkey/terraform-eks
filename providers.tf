@@ -49,7 +49,7 @@ resource "random_pet" "aksrandom" {}
 
 # terraform {
 #   backend "s3" {
-#     bucket = "dev-pharametrade"
+#     bucket = ""
 #     key    = "terraform-prod/terraform.tfstate"
 #     region = "ap-south-1"
 #   }
