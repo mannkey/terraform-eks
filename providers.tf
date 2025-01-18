@@ -1,4 +1,8 @@
 
+provider "aws" {
+  region = var.aws_region
+}
+
 terraform {
   required_version = ">= 0.12"
   required_providers {
@@ -28,3 +32,25 @@ terraform {
     }
   }
 }
+#
+provider "helm" {
+  kubernetes {
+    config_path = "~/.kube/config"
+  }
+}
+#
+provider "kubernetes" {
+  config_path = "~/.kube/config"
+}
+#
+provider "null" {
+}
+resource "random_pet" "aksrandom" {}
+
+# terraform {
+#   backend "s3" {
+#     bucket = "dev-pharametrade"
+#     key    = "terraform-prod/terraform.tfstate"
+#     region = "ap-south-1"
+#   }
+# }
