@@ -1,8 +1,5 @@
 data "aws_availability_zones" "available" {}
 
-locals {
-  cluster_name = "pharmetrade-eks-${random_string.suffix.result}"
-}
 
 resource "random_string" "suffix" {
   length  = 8
@@ -13,7 +10,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "5.17.0"
 
-  name                 = "eks-vpc"
+  name                 = "pharmetrade-eks-vpc"
   cidr                 = var.vpc_cidr
   azs                  = data.aws_availability_zones.available.names
   private_subnets      = ["10.0.1.0/24", "10.0.2.0/24"]
