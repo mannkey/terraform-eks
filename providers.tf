@@ -47,10 +47,10 @@ provider "null" {
 }
 resource "random_pet" "aksrandom" {}
 
-# terraform {
-#   backend "s3" {
-#     bucket = ""
-#     key    = "terraform-prod/terraform.tfstate"
-#     region = "ap-south-1"
-#   }
-# }
+terraform {
+  backend "s3" {
+    bucket = "dev-pharametrade"
+    key    = "terraform-pharmetrade-production/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
