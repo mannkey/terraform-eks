@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: adminer-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "adminer.pharmetrade.com"
+      http:
+        paths:
+          - pathType: Prefix
+            backend:
+              service:
+                name: adminer-service
+                port:
+                  number: 8080
+            path: "/"
+  tls:
+    - hosts:
+      - adminer.pharmetrade.com
+      secretName: adminer.pharmetrade.com-tls

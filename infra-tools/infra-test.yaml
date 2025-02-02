@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  test
+  labels:
+    app:  test
+spec:
+  selector:
+    matchLabels:
+      app: test
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app:  test
+    spec:
+      containers:
+      - name:  test
+        image:  nginx:latest
+        ports:
+        - containerPort:  80
+          name:  test
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-svc
+spec:
+  selector:
+    app: test
+  type: ClusterIP
+  ports:
+  - name: test-svc
+    protocol: TCP
+    port: 80
+    targetPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+    kubernetes.io/ingress.class: nginx
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "test.pharmetrade.com"
+      http:
+        paths:
+          - pathType: Prefix
+            backend:
+              service:
+                name: test-svc
+                port:
+                  number: 80
+            path: "/"
+  tls:
+    - hosts:
+      - test.pharmetrade.com
+      secretName: example-tls
