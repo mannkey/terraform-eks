@@ -1,0 +1,37 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pharmetrade-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "pharmetrade.com"
+      http:
+        paths:
+          - pathType: Prefix
+            backend:
+              service:
+                name: pharmetrade-service
+                port:
+                  number: 80
+            path: "/"
+    - host: "www.pharmetrade.com"
+      http:
+        paths:
+          - pathType: Prefix
+            backend:
+              service:
+                name: pharmetrade-service
+                port:
+                  number: 80
+            path: "/"
+  tls:
+    - hosts:
+      - pharmetrade.com
+      secretName: pharmetrade.pharmetrade.com-tls
+    - hosts:
+      - www.pharmetrade.com
+      secretName: www.pharmetrade.pharmetrade.com-tls

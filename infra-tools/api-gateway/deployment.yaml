@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway-deployment
+  labels:
+    app: api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+        - name: api-gateway
+          image: headway630/pharmetrade_apigateway-server:latest
+          command:  ["dotnet", "PharmEtrade_ApiGateway.dll", "--urls", "http://0.0.0.0:5000"]
+          ports:
+            - containerPort: 5000
+              name: api-gateway
