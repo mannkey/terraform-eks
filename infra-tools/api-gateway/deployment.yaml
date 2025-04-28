@@ -21,29 +21,101 @@ spec:
           ports:
             - containerPort: 5000
           env:
+            - name: DB_APIDBConnectionString
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap-apigateway
+                  key: DB_APIDBConnectionString
+                  optional: true
+            - name: AWS_AccessKey
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap-apigateway
+                  key: AWS_AccessKey
+                  optional: true
+            - name: AWS_SecretKey
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap-apigateway
+                  key: AWS_SecretKey
+                  optional: true
+            - name: AWS_BucketName
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap-apigateway
+                  key: AWS_BucketName
+                  optional: true
+            - name: AWS_Region
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap-apigateway
+                  key: AWS_Region
+                  optional: true
+            - name: AWS_AwsSesAccessKeyId
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap-apigateway
+                  key: AWS_AwsSesAccessKeyId
+                  optional: true
+            - name: AWS_AwsSesSecretAccessKey
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap-apigateway
+                  key: AWS_AwsSesSecretAccessKey
+                  optional: true
+            - name: AWS_AwsSesRegionEndPoint
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap-apigateway
+                  key: AWS_AwsSesRegionEndPoint
+                  optional: true
+            - name: FEDEX_grant_type
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap-apigateway
+                  key: FEDEX_grant_type
+                  optional: true
             - name: FEDEX_CLIENT_ID
               valueFrom:
-                secretKeyRef:
-                  name: secret
+                configMapKeyRef:
+                  name: configmap-apigateway
                   key: FEDEX_client_id
                   optional: true
             - name: FEDEX_CLIENT_SECRET
               valueFrom:
-                secretKeyRef:
-                  name: secret
+                configMapKeyRef:
+                  name: secret-apigateway
                   key: FEDEX_client_secret
+                  optional: true
+            - name: FEDEX_rates_grant_type
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap-apigateway
+                  key: FEDEX_rates_grant_type
                   optional: true
             - name: FEDEX_RATES_CLIENT_ID
               valueFrom:
                 configMapKeyRef:
-                  name: configmap-secret
+                  name: secret-apigateway
                   key: FEDEX_rates_client_id
                   optional: true
             - name: FEDEX_RATES_CLIENT_SECRET
               valueFrom:
                 configMapKeyRef:
-                  name: configmap-secret
+                  name: secret-apigateway
                   key: FEDEX_rates_client_secret
+                  optional: true
+            - name: SQUAREUP_access_token
+              valueFrom:
+                configMapKeyRef:
+                  name: secret-apigateway
+                  key: SQUAREUP_access_token
+                  optional: true
+            - name: SQUAREUP_Environment
+              valueFrom:
+                configMapKeyRef:
+                  name: secret-apigateway
+                  key: SQUAREUP_Environment
                   optional: true
           resources:
             requests:
