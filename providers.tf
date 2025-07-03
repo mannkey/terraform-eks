@@ -4,7 +4,7 @@ provider "aws" {
 }
 
 terraform {
-  required_version = ">= 0.12"
+  required_version = ">= 1.0"
   required_providers {
     random = {
       source  = "hashicorp/random"
@@ -16,7 +16,7 @@ terraform {
     }
     aws = {
       source  = "hashicorp/aws"
-      version = ">= 3.68.0"
+      version = "~> 5.0"
     }
     local = {
       source  = "hashicorp/local"
@@ -30,18 +30,25 @@ terraform {
       source  = "hashicorp/cloudinit"
       version = "~> 2.2.0"
     }
+    time = {
+      source  = "hashicorp/time"
+      version = "~> 0.9.0"
+    }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "~> 2.12.0"
+    }
   }
 }
 #
+# Configure Helm provider to use kubeconfig
 provider "helm" {
   kubernetes {
     config_path = "~/.kube/config"
   }
 }
 #
-provider "kubernetes" {
-  config_path = "~/.kube/config"
-}
+# Kubernetes provider is configured in k8s-deployments.tf
 #
 provider "null" {
 }
