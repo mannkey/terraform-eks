@@ -37,11 +37,11 @@ resource "kubernetes_deployment" "api_gateway" {
       spec {
         container {
           name  = "api-gateway"
-          image = "headway630/pharmetrade-server:latest"
+          image = "headway630/pharmetrade_apigateway-server:latest"
 
           # Your actual API Gateway/Server image
           port {
-            container_port = 8080
+            container_port = 5000
             name           = "api-gateway"
           }
         }
@@ -65,8 +65,8 @@ resource "kubernetes_service" "api_gateway" {
     }
 
     port {
-      port        = 8080
-      target_port = 8080
+      port        = 5000
+      target_port = 5000
       protocol    = "TCP"
     }
 

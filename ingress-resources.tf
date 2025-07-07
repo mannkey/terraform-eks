@@ -20,6 +20,7 @@ resource "kubernetes_ingress_v1" "pharmetrade_ingress" {
       secret_name = "pharmetrade-tls"
     }
 
+    # www.pharmetrade.com
     rule {
       host = "www.pharmetrade.com"
       http {
@@ -38,6 +39,7 @@ resource "kubernetes_ingress_v1" "pharmetrade_ingress" {
       }
     }
 
+    # pharmetrade.com
     rule {
       host = "pharmetrade.com"
       http {
@@ -90,7 +92,7 @@ resource "kubernetes_ingress_v1" "api_gateway_ingress" {
             service {
               name = kubernetes_service.api_gateway.metadata[0].name
               port {
-                number = 80
+                number = 5000
               }
             }
           }

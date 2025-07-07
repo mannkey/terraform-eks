@@ -1,4 +1,3 @@
-
 provider "aws" {
   region = var.aws_region
 }
@@ -52,6 +51,21 @@ provider "helm" {
 #
 provider "null" {
 }
+
+provider "kubernetes" {
+  host                   = data.aws_eks_cluster.cluster.endpoint
+  cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority[0].data)
+  token                  = data.aws_eks_cluster_auth.this.token
+}
+
+data "aws_eks_cluster" "cluster" {
+  name = module.eks.cluster_name
+}
+
+data "aws_eks_cluster_auth" "this" {
+  name = module.eks.cluster_name
+}
+
 resource "random_pet" "aksrandom" {}
 
 terraform {
