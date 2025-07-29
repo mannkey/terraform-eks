@@ -105,7 +105,7 @@ resource "kubernetes_deployment" "pharmetrade" {
       spec {
         container {
           name  = "pharmetrade"
-          image = "headway630/pharmaetrade-v1:v1"
+          image = "headway630/pharmaetrade:latest"
 
           env {
             name  = "VITE_API_BASE_URL"
