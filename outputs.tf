@@ -51,17 +51,17 @@ output "kubeconfig_update_command" {
 # Domain URLs (after DNS configuration)
 output "pharmetrade_frontend_url" {
   description = "Pharmetrade Frontend URL"
-  value       = "https://www.pharmaetrade.com"
+  value       = "https://www.pharmetrade.com"
 }
 
 output "api_gateway_url" {
   description = "API Gateway/Server URL"
-  value       = "https://www.server.pharmaetrade.com"
+  value       = "https://www.server.pharmetrade.com"
 }
 
 output "adminer_url" {
   description = "Adminer Database Admin URL"
-  value       = "https://adminer.pharmaetrade.com"
+  value       = "https://adminer.pharmetrade.com"
 }
 
 # Ingress Controller LoadBalancer (for DNS configuration)

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: pharmetrade
-          image: headway630/pharmaetrade-v1:v1
+          image: headway630/pharmetrade:latest
           imagePullPolicy: Always
           env:
             - name: VITE_API_BASE_URL

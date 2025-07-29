@@ -35,6 +35,9 @@ resource "kubernetes_deployment" "api_gateway" {
       }
 
       spec {
+        image_pull_secrets {
+          name = "regcred"
+        }
         container {
           name  = "api-gateway"
           image = "headway630/pharmetrade_apigateway-server:latest"
@@ -103,13 +106,17 @@ resource "kubernetes_deployment" "pharmetrade" {
       }
 
       spec {
+        image_pull_secrets {
+          name = "regcred"
+        }
+
         container {
           name  = "pharmetrade"
           image = "headway630/pharmaetrade:latest"
 
           env {
             name  = "VITE_API_BASE_URL"
-            value = "https://www.server.pharmaetrade.com"
+            value = "https://www.server.pharmetrade.com"
           }
 
           port {
